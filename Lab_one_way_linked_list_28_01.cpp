@@ -48,10 +48,18 @@ int search(int target,Node* list){
 }
 void insertNode(int position, Node* list, Node* add){
     //inserts after Node, which num == position
+    // can use a trick to push == insert after -1
+    // insert(-1, list, addNode) == insert(0, list, addNode) + swapValues(list, list->next)
+    // if(position == -1){
+    //     insertNode(0, list, add);
+    //     int temp = list->value;
+    //     list->value = list->next->value;
+    //     list->next->value = temp;
+    //     return;
+    // }
     for(int i = 0; i < position; i++){
         if(list->next == nullptr){
             cout << "Error, can't add a node, your list is too short!" << endl;
-            return;
         }
         list = list->next;
     }
@@ -62,7 +70,14 @@ void insertNode(int position, Node* list, Node* add){
 }
 void removeNode(int position, Node* list){
         //position != 0
-        // for removing the first Node use "delete pop();"
+        // for removing the first Node better use "delete pop();"
+        // can use a trick to pop == remove(o, list)
+        // remove(o, list) ==swapValues(list, list->next)+ remove(1, list)
+        // if(position == 0){
+        //     list->value = list->next->value;
+        //     removeNode(1, list);
+        //     return;
+        // }
         for(int i = 0; i < position-1; i++){
             if(list->next->next == nullptr){
                 cout << "Error, can't remove a node, your list is too short!" << endl;
@@ -99,11 +114,12 @@ int main(){
     list_view(list);
     //cout<< "List size = " << size(list) << endl;
     //cout<< "Search result = " << search(89, list) << endl;
-    insertNode(5, list, add);
+    //insertNode(-1, list, add);
     //list_view(list);
-    removeNode(5,list);
+    //removeNode(2,list);
     //cout << "pop value = " <<  popNode(list)->value << endl;
-    list_view(list);
+    //pushNode(15, list);
+    //list_view(list);
 
 
 }
