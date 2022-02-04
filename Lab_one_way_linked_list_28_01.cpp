@@ -12,14 +12,24 @@ int size(Node* list){
     }
     return size;
 }
-void list_view(Node* list){
-    while(list != nullptr){
-        cout << list->value << endl;
+int* getList(Node* list){
+    int n = size(list);
+    int *result = new int [n];
+    int i = 0;
+    while(list != nullptr && i < n){
+        result[i] = list->value;
         list = list->next;
+        i++;
     }
-
+    return result;
 }
-Node* list_generate(int size, int* data){
+void printList(int* listArray, int n){
+    for(int i = 0; i < n; i++){
+        cout << listArray[i] << '\t';
+    }
+    cout << endl;
+}
+Node* generateList(int size, int* data){
     Node* last = new Node;
     Node* first;
     last->next = nullptr;
@@ -32,7 +42,7 @@ Node* list_generate(int size, int* data){
     first->value = data[0];
     return first;
 }
-int search(int target,Node* list){
+int searchNode(int target,Node* list){
     int result_position = -1;
     while(list->value != target){
         if(list->next == nullptr){
@@ -110,16 +120,15 @@ int main(){
     int mass[8] = {23,21,3,34,56,6,7,89};
     Node* add = new Node;
     add->value = 777;
-    Node* list = list_generate(k,mass);
-    list_view(list);
+    Node* list = generateList(k,mass);
+    printList(getList(list), size(list));
+    //cout << searchNode(3, list) << endl;
     //cout<< "List size = " << size(list) << endl;
     //cout<< "Search result = " << search(89, list) << endl;
     //insertNode(-1, list, add);
-    //list_view(list);
     //removeNode(2,list);
     //cout << "pop value = " <<  popNode(list)->value << endl;
     //pushNode(15, list);
-    //list_view(list);
 
 
 }
